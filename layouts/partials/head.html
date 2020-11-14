@@ -1,0 +1,60 @@
+{{ if eq .RelPermalink "/" }}
+<title>{{ .Site.Title }}</title>
+<meta property="og:title" content="{{ .Site.Title }}">
+<meta property="og:type" content="website">
+{{ else }}
+<title>{{ .Title }}{{ with .Params.SubTitle }} - {{ . }} {{ end }} - {{ .Site.Title }}</title>
+
+<meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}">
+{{ end }}
+
+{{ with .Description }}
+    {{ $.Scratch.Set "summary" (markdownify .) }}
+{{ else }}
+    {{ $.Scratch.Set "summary" ((delimit (findRE "(<p.*?>(.|\n)*?</p>\\s*)+" .Content) "[&hellip;] ") | plainify | truncate (default 200 .Site.Params.summary_length) (default " &hellip;" .Site.Params.text.truncated)) }}
+{{ end }}
+
+{{ if eq .RelPermalink "/" }}
+<meta property="description" content="{{ .Site.Params.description }}">
+{{ else }}
+    {{ with ($.Scratch.Get "summary") }}
+    <meta property="description" content="{{ . }}">
+    <meta property="og:description" content="{{ . }}">
+    {{ end }}
+{{ end }}
+
+{{ if .Keywords }}
+<meta property="keywords" content ="{{ delimit .Keywords ", " }}">
+{{ end }}
+
+{{ with .Site.Params.Authr }}
+<meta property="og:image" content="{{ .Avatar }}">
+{{ end }}
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel="shortcut icon" href="{{ .Site.Params.Logo }}" type="image/x-icon" />
+
+{{ with .OutputFormats.Get "RSS" }}
+<link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+{{ end }}
+
+<link rel="stylesheet" href="{{ "/css/style.css" | relURL }}" />
+<!-- <link rel="stylesheet" href="{{ "/css/black.css" | relURL }}" /> -->
+<link rel="stylesheet" href="{{ "/css/reset.css" | relURL }}" />
+
+{{ with .Site.Params.CDN }}
+
+{{ range $k, $v := .js }}
+<script src="{{ $v }}"></script>
+{{ if eq $k "highlightjs" }}
+<script>hljs.initHighlightingOnLoad();</script>
+{{ end }}
+{{ end }}
+
+{{ range $k, $v := .css }}
+<link href="{{ $v }}" rel="stylesheet" />
+{{ end }}
+
+{{ end }}

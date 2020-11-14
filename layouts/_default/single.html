@@ -1,0 +1,133 @@
+<html lang="en-US">
+
+<head>
+    {{ partial "head.html" . }}
+</head>
+
+<body id="period" class="home blog">
+    <a class="skip-content" href="#main">Press "Enter" to skip to content</a>
+    <div id="overflow-container" class="overflow-container">
+        {{ partial "header.html" . }}
+        <div id="primary-container" class="primary-container">
+            <div class="max-width">
+                <section id="main" class="main" role="main">
+                    <div id="loop-container" class="loop-container">
+                        <div
+                            class="post type-post status-publish format-standard hentry entry">
+                            <article>
+                                <div class="post-container">
+                                    <div class="post-header">
+                                        <h2 class="post-title">
+                                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                        </h2>
+                                        {{ if eq .Section "posts" }}
+                                        <div class="post-byline">
+                                            发布于
+                                            <a class="date" href="javascript:;">{{ .Date.Format "2006/01/02" }}</a>
+                                            {{ with .Site.Params.Author }}
+                                            作者 
+                                            <a class="author" href="javascript:;">{{ .Name }}</a></div>
+                                            {{ end }}
+                                        {{ end }}
+                                    </div>
+                                    <div class="post-content">
+                                        {{ .Content }}
+
+                                        {{ if eq .Section "posts" }}
+                                        {{ $related := .Site.RegularPages.Related . | first 5 }}
+                                        {{ with $related }}
+                                        <div class="rp4wp-related-posts">
+                                            <h3>相关文章</h3>
+                                            <ul>
+                                                {{ range . }}
+                                                <li>
+                                                    <div class="rp4wp-related-post-content">
+                                                        <a
+                                                            href="{{ .URL }}">{{ .Title }}</a>
+                                                    </div>
+                                                </li>
+                                                {{ end }}
+                                            </ul>
+                                        </div>
+                                        {{ end }}
+                                        {{ end }}
+                                    </div>
+
+                                    {{ if eq .Section "posts" }}
+                                    {{ if eq .Section "posts" }}
+                                    <!-- <div class="copyright">
+                                        <ul>
+                                            <p></p>
+                                            <li>本文地址: <a href="{{ .Permalink | relURL }}"
+                                                    title="{{ .Title }}">{{ .Permalink }}</a>
+                                            </li>
+                                            <li>转载请注明出处 </li>
+                                        </ul>
+                                    </div> -->
+                                    {{ end }}
+
+                                    <div class="post-meta">
+                                        {{ with .Params.categories }}
+                                        <div class="post-categories">
+                                        <span>分类&nbsp;&nbsp;</span>
+                                        {{ range . }}
+                                        <a href="/categories/{{ . }}" title="View all posts in PHP8">{{ . }}</a>&nbsp;&nbsp;
+                                        {{ end }}
+                                        </div>
+                                        {{ end }}
+                                        {{ with .Params.tags }}
+                                        <div class="post-tags">
+                                            <ul>
+                                            {{ range . }}
+                                            <li>
+                                                <a href="/tags/{{ . }}" title="View all posts tagged match">{{ . }}</a>
+                                            </li>
+                                            {{ end }}
+                                            </ul>
+                                        </div>
+                                        {{ end }}
+                                        
+                                        <nav class="further-reading">
+                                            {{ if .Prev }}
+                                            <div class="previous">
+                                                <span><< 上一篇</span>
+                                                <a href="{{ .Prev.URL }}"
+                                                    rel="prev">{{ .Prev.Title }}</a> </div>
+                                            {{ end }}
+                                            {{ if .Next }}
+                                            <div class="next">
+                                                <span>下一篇 >></span>
+                                                <a href="{{ .Next.URL }}">{{ .Next.Title }}</a> 
+                                            </div>
+                                            {{ end }}
+                                        </nav>
+                                    </div>
+                                    
+                                    {{ end }}
+
+                                    {{ if .Site.Params.comment }}
+                                    <div style="width: 100%;height: 1px;border:1px solid #f8f8f8;margin: 50px 0 30px;"></div>
+                                    <script src="https://utteranc.es/client.js"
+                                            repo="{{ .Site.Params.comment.repo }}"
+                                            issue-term="title"
+                                            theme="{{ .Site.Params.comment.theme }}"
+                                            crossorigin="anonymous"
+                                            async>
+                                    </script>
+                                    {{ end }}
+
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+                {{ partial "aside.html" . }}
+            </div><!-- .max-width -->
+        </div><!-- .primary-container -->
+
+        {{ partial "footer.html" . }}
+    </div>
+    <!-- .overflow-container -->
+</body>
+
+</html>

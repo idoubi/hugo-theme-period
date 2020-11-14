@@ -1,0 +1,24 @@
+<html lang="en-US">
+
+<head>
+    {{ partial "head.html" . }}
+</head>
+
+<body id="period" class="home blog">
+    <a class="skip-content" href="#main">Press "Enter" to skip to content</a>
+    <div id="overflow-container" class="overflow-container">
+        {{ partial "header.html" . }}
+        <div id="primary-container" class="primary-container">
+            <div class="max-width">
+                {{ partial "main.html" . }}
+                
+                {{ partial "aside.html" . }}
+            </div><!-- .max-width -->
+        </div><!-- .primary-container -->
+
+        {{ partial "footer.html" . }}
+    </div>
+    <!-- .overflow-container -->
+</body>
+
+</html>

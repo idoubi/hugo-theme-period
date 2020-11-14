@@ -1,0 +1,121 @@
+<aside class="sidebar sidebar-primary" id="sidebar-primary" role="complementary">
+    <h1 class="screen-reader-text">Sidebar</h1>
+    <section id="text-2" class="widget widget_text">
+        <div class="textwidget">
+            {{ with .Site.Params.Author }}
+            <div id="profile">
+                <div id="profile_picture"><img src="{{ .Avatar }}"></div>
+                <div id="profile_intro">
+                    <p><span class="name">{{ .Name }}</span></p>
+                    <p class="intro">{{ .Description }}</p>
+                </div>
+            </div>
+            {{ end }}
+            <p>
+                <script type="text/javascript">
+                    (function ($) {
+                        $(document).ready(function () {
+                            var menuPrimaryContainer = $('#menu-primary-container');
+                            var profile = $('#text-2');
+                            $('#toggle-navigation').click(function () {
+                                if (menuPrimaryContainer.hasClass('open')) {
+                                    profile.removeClass('open');
+                                } else {
+                                    profile.addClass('open');
+                                }
+                            });
+                        });
+                    })(jQuery);
+                </script>
+            </p>
+        </div>
+    </section>
+    <!-- <section id="search-2" class="widget widget_search">
+        <div class="search-form-container">
+            <form role="search" method="get" class="search-form" action="https://www.laruence.com/">
+                <label class="screen-reader-text" for="search-field">Search</label>
+                <input id="search-field" type="search" class="search-field" value="" name="s"
+                    title="Search for:" placeholder="Search for...">
+                <input type="submit" class="search-submit" value="Search">
+            </form>
+        </div>
+    </section> -->
+    {{ with .Site.Params.Projects }}
+    <section id="text-5" class="widget widget_text">
+        <h2 class="widget-title">开源项目</h2>
+        <div class="textwidget">
+            <div id="projects" style="line-height: 22px;">
+                {{ range . }}
+                <a href="{{ index . "url" }}"
+                    target="_blank">{{ index . "name" }}</a>: &nbsp;{{ index . "description" }}<br>
+                {{ end }}
+        </div>
+    </section>
+    {{ end }}
+    
+    {{ with .Site.Params.Author.Mpqrcode }}
+    <section id="qrcode" class="widget widget_media_image">
+        <h2 class="widget-title">公众号</h2><img width="258" height="258"
+            src="{{ . }}"
+            class="image wp-image-5514  attachment-full size-full" alt=""
+            style="max-width: 100%; height: auto;"
+            srcset="{{ . }} 258w, {{ . }} 150w"
+            sizes="(max-width: 258px) 100vw, 258px">
+    </section>
+    {{ end }}
+
+    {{ if eq .Section "posts" }}
+    <section id="categories-3" class="widget widget_categories">
+        <h2 class="widget-title">分类</h2>
+        <form action="/categories/" method="get"><label class="screen-reader-text"
+                for="cat">分类</label><select name="cat" id="cat" class="postform">
+                <option value="-1">选择分类</option>
+                {{ range .Site.Taxonomies.categories }}
+                <option class="level-0" value="{{ .Page.Title }}">{{ .Page.Title }}({{ len .Pages }})</option>
+                {{ end }}
+            </select>
+        </form>
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            (function () {
+                var dropdown = document.getElementById("cat");
+
+                function onCatChange() {
+                    if (dropdown.options[dropdown.selectedIndex].value != "" ) {
+                        window.location.href = "/categories/" + dropdown.options[dropdown.selectedIndex].value
+                    }
+                }
+                dropdown.onchange = onCatChange;
+            })();
+            /* ]]> */
+        </script>
+    </section>
+    {{ end }}
+
+    {{ if eq .Section "posts" }}
+    <section id="tag_cloud-2" class="widget widget_tag_cloud">
+        <h2 class="widget-title">标签</h2>
+        <div class="tagcloud">
+            {{ range .Site.Taxonomies.tags }}
+            <a href="/tags/{{ .Page.Title }}"
+                class="tag-cloud-link tag-link-58 tag-link-position-1"
+                style="font-size: 11.083333333333pt;" aria-label="Apache (6 items)">{{ .Page.Title }}</a>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    {{ with .Site.Params.Links }}
+    <section id="text-6" class="widget widget_text">
+        <h2 class="widget-title">友情链接</h2>
+        <div class="textwidget">
+            <ul>
+                {{ range . }}
+                <li><a href="{{ index . "url" }}" target="_blank">{{ index . "title" }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+    </section>
+    {{ end }}
+    
+</aside>

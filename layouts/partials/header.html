@@ -1,0 +1,40 @@
+<header class="site-header" id="site-header" role="banner">
+    <div class="max-width">
+        <div id="title-container" class="title-container">
+            <div id="site-title" class="site-title"><a href="/">{{ .Site.Params.Title }}</a></div>
+            <p class="tagline">{{ .Site.Params.SubTitle }}</p>
+        </div>
+        <!-- <button id="toggle-navigation" class="toggle-navigation" name="toggle-navigation" aria-expanded="false">
+            <span class="screen-reader-text">open menu</span>
+            <svg width="36px" height="23px" viewBox="0 0 36 23" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <desc>mobile menu toggle button</desc>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g transform="translate(-142.000000, -104.000000)" fill="#FFFFFF">
+                        <g transform="translate(142.000000, 104.000000)">
+                            <rect x="0" y="20" width="36" height="3"></rect>
+                            <rect x="0" y="10" width="36" height="3"></rect>
+                            <rect x="0" y="0" width="36" height="3"></rect>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </button> -->
+        <div id="menu-primary-container" class="menu-primary-container">
+            <div class="icon-container">
+            </div>
+            <div id="menu-primary" class="menu-container menu-primary" role="navigation">
+                <nav class="menu">
+                    <ul id="menu-primary-items" class="menu-primary-items">
+                        {{ $currURL := .URL }}
+                        {{ range $k, $menu := .Site.Menus.main }}
+                        <li id="menu-item-{{ $k }}"
+                            class="menu-item menu-item-type-custom menu-item-object-custom {{ if eq .URL $currURL }}current-menu-item{{ end }}">
+                            <a href="{{ .URL }}" aria-current="page" tabindex="{{ $k }}">{{ .Name }}</a></li>
+                        {{ end }}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
