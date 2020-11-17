@@ -1,5 +1,7 @@
 <aside class="sidebar sidebar-primary" id="sidebar-primary" role="complementary">
     <h1 class="screen-reader-text">Sidebar</h1>
+    {{ $site := .Site }}
+
     {{ with .Site.Params.Widget.About }}
     {{ if (index . "show") }}
     <section id="text-2" class="widget widget_text">
@@ -73,12 +75,13 @@
     {{ end }}
 
     {{ with .Site.Params.Widget.Categories }}
+    {{ if (index . "show") }}
     <section id="categories-3" class="widget widget_categories">
         <h2 class="widget-title">{{ index . "title" }}</h2>
         <form action="/categories/" method="get"><label class="screen-reader-text"
                 for="cat">Categories</label><select name="cat" id="cat" class="postform">
                 <option value="-1">Select Category</option>
-                {{ range .Site.Taxonomies.categories }}
+                {{ range $site.Taxonomies.categories }}
                 <option class="level-0" value="{{ .Page.Title }}">{{ .Page.Title }}({{ len .Pages }})</option>
                 {{ end }}
             </select>
@@ -99,19 +102,21 @@
         </script>
     </section>
     {{ end }}
+    {{ end }}
 
     {{ with .Site.Params.Widget.Tags }}
+    {{ if (index . "show") }}
     <section id="tag_cloud-2" class="widget widget_tag_cloud">
         <h2 class="widget-title">{{ index . "title" }}</h2>
         <div class="tagcloud">
-            {{ println .Site.Taxonomies.tags }}
-            {{ range .Site.Taxonomies.tags }}
+            {{ range $site.Taxonomies.tags }}
             <a href="/tags/{{ .Page.Title }}"
                 class="tag-cloud-link tag-link-58 tag-link-position-1"
                 style="font-size: 11.083333333333pt;" aria-label="Apache (6 items)">{{ .Page.Title }}</a>
             {{ end }}
         </div>
     </section>
+    {{ end }}
     {{ end }}
 
     {{ with .Site.Params.Widget.Links }}

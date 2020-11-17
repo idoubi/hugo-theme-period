@@ -1,3 +1,38 @@
+## Period
+
+[Period](https://github.com/idoubi/hugo-theme-period) is a beautiful theme for Hugo. 
+
+Reference from [Laruence's blog](https://www.laruence.com/)
+
+## Usage
+
+goto your hugo site 
+
+```shell
+cd {path-to-your-hugo-site}
+```
+
+get the theme
+
+```shell
+git clone https://github.com/idoubi/hugo-theme-period.git themes/period
+```
+
+copy theme config file 
+
+```shell
+copy themes/period/exampleSite/config.toml config.toml
+```
+
+run your hugo site 
+
+```shell
+hugo server -t period
+```
+
+## Example Config
+
+```toml
 theme = "period"
 
 baseURL = "https://example.com"
@@ -83,3 +118,14 @@ title = "Categories"
 [params.widget.tags]
 show = true
 title = "Tags"
+```
+
+## Preview 
+
+![](./images/screenshot.png)
+
+
+
+## Contributing
+
+Any suggestions or pull request will be appreciated.
