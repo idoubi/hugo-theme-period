@@ -20,20 +20,23 @@
                                         <h2 class="post-title">
                                             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                                         </h2>
-                                        {{ if eq .Section "posts" }}
-                                        <div class="post-byline">
-                                            发布于
+                                        {{ if or (eq .Section "posts") (eq .Section "post") }}
+                                        <div class="post-byline">Published on
                                             <a class="date" href="javascript:;">{{ .Date.Format "2006/01/02" }}</a>
-                                            {{ with .Site.Params.Author }}
-                                            作者 
-                                            <a class="author" href="javascript:;">{{ .Name }}</a></div>
+                                            {{ $author := .Params.Author }}
+                                            {{ if not $author }}
+                                            {{ $author = .Site.Author }}
+                                            {{ end }}
+                                            {{ if $author }}
+                                            By 
+                                            <a class="author" href="javascript:;">{{ $author }}</a></div>
                                             {{ end }}
                                         {{ end }}
                                     </div>
                                     <div class="post-content">
                                         {{ .Content }}
 
-                                        {{ if eq .Section "posts" }}
+                                        {{ if or (eq .Section "posts") (eq .Section "post") }}
                                         {{ $related := .Site.RegularPages.Related . | first 5 }}
                                         {{ with $related }}
                                         <div class="rp4wp-related-posts">
@@ -53,8 +56,7 @@
                                         {{ end }}
                                     </div>
 
-                                    {{ if eq .Section "posts" }}
-                                    {{ if eq .Section "posts" }}
+                                    {{ if or (eq .Section "posts") (eq .Section "post") }}
                                     <!-- <div class="copyright">
                                         <ul>
                                             <p></p>
@@ -66,10 +68,11 @@
                                     </div> -->
                                     {{ end }}
 
+                                    {{ if or (eq .Section "posts") (eq .Section "post") }}
                                     <div class="post-meta">
                                         {{ with .Params.categories }}
                                         <div class="post-categories">
-                                        <span>分类&nbsp;&nbsp;</span>
+                                        <span>Categories&nbsp;&nbsp;</span>
                                         {{ range . }}
                                         <a href="/categories/{{ . }}" title="View all posts in PHP8">{{ . }}</a>&nbsp;&nbsp;
                                         {{ end }}
@@ -90,13 +93,13 @@
                                         <nav class="further-reading">
                                             {{ if .Prev }}
                                             <div class="previous">
-                                                <span><< 上一篇</span>
+                                                <span><< Prev</span>
                                                 <a href="{{ .Prev.URL }}"
                                                     rel="prev">{{ .Prev.Title }}</a> </div>
                                             {{ end }}
                                             {{ if .Next }}
                                             <div class="next">
-                                                <span>下一篇 >></span>
+                                                <span>Next >></span>
                                                 <a href="{{ .Next.URL }}">{{ .Next.Title }}</a> 
                                             </div>
                                             {{ end }}
@@ -105,15 +108,17 @@
                                     
                                     {{ end }}
 
-                                    {{ if .Site.Params.comment }}
+                                    {{ with .Site.Params.Comment }}
+                                    {{ if (index . "show") }}
                                     <div style="width: 100%;height: 1px;border:1px solid #f8f8f8;margin: 50px 0 30px;"></div>
                                     <script src="https://utteranc.es/client.js"
-                                            repo="{{ .Site.Params.comment.repo }}"
+                                            repo="{{ .repo }}"
                                             issue-term="title"
-                                            theme="{{ .Site.Params.comment.theme }}"
+                                            theme="{{ .theme }}"
                                             crossorigin="anonymous"
                                             async>
                                     </script>
+                                    {{ end }}
                                     {{ end }}
 
                                 </div>

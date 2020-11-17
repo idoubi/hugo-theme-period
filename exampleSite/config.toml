@@ -1,0 +1,89 @@
+theme = "period"
+
+baseURL = "/"
+paginate = 20
+title = "艾逗笔博客"
+
+[permalinks]
+note = "/note/:year/:month/:day/:slug/"
+post = "/post/:year/:month/:day/:slug/"
+
+[[menu.main]]
+name = "首页"
+url = "/"
+weight = 1
+[[menu.main]]
+name = "笔记"
+url = "/categories/开发笔记/"
+weight = 2
+[[menu.main]]
+name = "教程"
+url = "/categories/系列分享/"
+weight = 3
+[[menu.main]]
+name = "开源"
+url = "/categories/开源项目"
+weight = 4
+[[menu.main]]
+name = "随笔"
+url = "/categories/随笔杂感"
+weight = 5
+[[menu.main]]
+name = "关于"
+url = "/about"
+weight = 6
+
+[params]
+copyright = "© 艾逗笔 2020 All rights reserved"
+description = "艾逗笔个人博客，专注分享优质的技术内容。"
+logo = "https://blogcdn.idoustudio.com/idoubi.png"
+subTitle = "有逻辑的脑子万里挑一"
+title = "艾逗笔"
+
+[params.cdn.js]
+highlightjs = "https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/highlight.min.js"
+jquery = "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"
+
+[params.cdn.css]
+highlightjs = "https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/styles/an-old-hope.min.css"
+
+[params.author]
+avatar = "https://blogcdn.idoustudio.com/idoubi.png"
+blog = "https://idoubi.cc"
+description = "全栈开发者，爱好造轮子。"
+github = "https://github.com/idoubi"
+mpqrcode = "https://blogcdn.idoustudio.com/idoubi-mp.jpeg"
+name = "艾逗笔"
+
+[params.comment]
+repo = "idoubi/idoubi.cc"
+theme = "github-light"
+
+# 开源项目
+[[params.projects]]
+description = "一款简洁、高效的微信开发框架"
+name = "douchat"
+url = "https://douchat.net"
+
+[[params.projects]]
+description = "Golang 每日新闻检索平台"
+name = "gonews"
+url = "https://github.com/idoubi/gonews"
+
+[[params.projects]]
+description = "根据 SQL 语句生成 Golang 结构体的工具"
+name = "sql2struct"
+url = "https://github.com/idoubi/sql2struct"
+
+[[params.projects]]
+description = "在 Go 中发起 HTTP 请求的工具库"
+name = "goz"
+url = "https://github.com/idoubi/goz"
+
+[[params.projects]]
+description = "获取常用信息的命令行工具"
+name = "tellme"
+url = "https://github.com/idoubi/tellme"
+
+# 友情链接
+# [[params.links]]

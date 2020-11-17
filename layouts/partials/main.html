@@ -14,25 +14,34 @@
                         <h2 class="post-title">
                             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                         </h2>
-                        <div class="post-byline">发布于
+                        <div class="post-byline">Published on
                             <a class="date" href="javascript:;">{{ .Date.Format "2006/01/02" }}</a>
-                            {{ with .Site.Params.Author }}
-                                作者 <a class="author" href="{{ .Home }}">{{ .Name }}</a></div>
+                            {{ $author := .Params.Author }}
+                            {{ if not $author }}
+                            {{ $author = .Site.Author }}
+                            {{ end }}
+                            {{ if $author }}
+                            By 
+                            <a class="author" href="javascript:;">{{ $author }}</a></div>
                             {{ end }}
                     </div>
                     <div class="post-content">
-                        <p>{{ .Summary | truncate 80 }}</p>
+                        {{ $description := .Description }}
+                        {{ if not $description }}
+                        {{ $description = .Summary | truncate 80 }}
+                        {{ end }}
+                        <p>{{ $description }}</p>
                         {{ if or .Params.Tags .Params.Categories }}
                         <div class="post-categories">
                             {{ if .Params.Tags }}
-                            <span>标签 </span>
+                            <span>Tags </span>
                             {{ range .Params.Tags }}
                             <a href="/tags/{{ . }}" title="{{ . }}">{{ . }}</a>
                             {{ end }}
                             {{ end }}
 
                             {{ if .Params.Categories }}
-                            <span>分类 </span>
+                            <span>Categories </span>
                             {{ range .Params.Categories }}
                             <a href="/categories/{{ . }}" title="{{ . }}">{{ . }}</a>
                             {{ end }}

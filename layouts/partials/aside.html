@@ -1,16 +1,18 @@
 <aside class="sidebar sidebar-primary" id="sidebar-primary" role="complementary">
     <h1 class="screen-reader-text">Sidebar</h1>
+    {{ with .Site.Params.Widget.About }}
+    {{ if (index . "show") }}
     <section id="text-2" class="widget widget_text">
         <div class="textwidget">
-            {{ with .Site.Params.Author }}
+            
             <div id="profile">
-                <div id="profile_picture"><img src="{{ .Avatar }}"></div>
+                <div id="profile_picture"><img src="{{ index . "logo" }}"></div>
                 <div id="profile_intro">
-                    <p><span class="name">{{ .Name }}</span></p>
-                    <p class="intro">{{ .Description }}</p>
+                    <p><span class="name">{{ index . "title" }}</span></p>
+                    <p class="intro">{{ index . "description" }}</p>
                 </div>
             </div>
-            {{ end }}
+            
             <p>
                 <script type="text/javascript">
                     (function ($) {
@@ -30,6 +32,8 @@
             </p>
         </div>
     </section>
+    {{ end }}
+    {{ end }}
     <!-- <section id="search-2" class="widget widget_search">
         <div class="search-form-container">
             <form role="search" method="get" class="search-form" action="https://www.laruence.com/">
@@ -40,36 +44,40 @@
             </form>
         </div>
     </section> -->
-    {{ with .Site.Params.Projects }}
+    {{ with .Site.Params.Widget.Projects }}
+    {{ if (index . "show") }}
     <section id="text-5" class="widget widget_text">
-        <h2 class="widget-title">开源项目</h2>
+        <h2 class="widget-title">{{ index . "title" }}</h2>
         <div class="textwidget">
             <div id="projects" style="line-height: 22px;">
-                {{ range . }}
+                {{ range (index . "items") }}
                 <a href="{{ index . "url" }}"
                     target="_blank">{{ index . "name" }}</a>: &nbsp;{{ index . "description" }}<br>
                 {{ end }}
         </div>
     </section>
     {{ end }}
+    {{ end }}
     
-    {{ with .Site.Params.Author.Mpqrcode }}
+    {{ with .Site.Params.Widget.Qrcode }}
+    {{ if (index . "show") }}
     <section id="qrcode" class="widget widget_media_image">
-        <h2 class="widget-title">公众号</h2><img width="258" height="258"
-            src="{{ . }}"
+        <h2 class="widget-title">{{ index . "title" }}</h2>
+        <img width="258" height="258"
+            src="{{ index . "url" }}"
             class="image wp-image-5514  attachment-full size-full" alt=""
             style="max-width: 100%; height: auto;"
-            srcset="{{ . }} 258w, {{ . }} 150w"
             sizes="(max-width: 258px) 100vw, 258px">
     </section>
     {{ end }}
+    {{ end }}
 
-    {{ if eq .Section "posts" }}
+    {{ with .Site.Params.Widget.Categories }}
     <section id="categories-3" class="widget widget_categories">
-        <h2 class="widget-title">分类</h2>
+        <h2 class="widget-title">{{ index . "title" }}</h2>
         <form action="/categories/" method="get"><label class="screen-reader-text"
-                for="cat">分类</label><select name="cat" id="cat" class="postform">
-                <option value="-1">选择分类</option>
+                for="cat">Categories</label><select name="cat" id="cat" class="postform">
+                <option value="-1">Select Category</option>
                 {{ range .Site.Taxonomies.categories }}
                 <option class="level-0" value="{{ .Page.Title }}">{{ .Page.Title }}({{ len .Pages }})</option>
                 {{ end }}
@@ -92,10 +100,11 @@
     </section>
     {{ end }}
 
-    {{ if eq .Section "posts" }}
+    {{ with .Site.Params.Widget.Tags }}
     <section id="tag_cloud-2" class="widget widget_tag_cloud">
-        <h2 class="widget-title">标签</h2>
+        <h2 class="widget-title">{{ index . "title" }}</h2>
         <div class="tagcloud">
+            {{ println .Site.Taxonomies.tags }}
             {{ range .Site.Taxonomies.tags }}
             <a href="/tags/{{ .Page.Title }}"
                 class="tag-cloud-link tag-link-58 tag-link-position-1"
@@ -105,17 +114,19 @@
     </section>
     {{ end }}
 
-    {{ with .Site.Params.Links }}
+    {{ with .Site.Params.Widget.Links }}
+    {{ if (index . "show") }}
     <section id="text-6" class="widget widget_text">
-        <h2 class="widget-title">友情链接</h2>
+        <h2 class="widget-title">{{ index . "title" }}</h2>
         <div class="textwidget">
             <ul>
-                {{ range . }}
+                {{ range (index . "items") }}
                 <li><a href="{{ index . "url" }}" target="_blank">{{ index . "title" }}</a></li>
                 {{ end }}
             </ul>
         </div>
     </section>
+    {{ end }}
     {{ end }}
     
 </aside>
