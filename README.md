@@ -4,6 +4,8 @@
 
 Reference from [Laruence's blog](https://www.laruence.com/)
 
+view the [Demo Site](https://idoubi.cc)
+
 ## Usage
 
 goto your hugo site 
