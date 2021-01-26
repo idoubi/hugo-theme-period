@@ -36,16 +36,7 @@
     </section>
     {{ end }}
     {{ end }}
-    <!-- <section id="search-2" class="widget widget_search">
-        <div class="search-form-container">
-            <form role="search" method="get" class="search-form" action="https://www.laruence.com/">
-                <label class="screen-reader-text" for="search-field">Search</label>
-                <input id="search-field" type="search" class="search-field" value="" name="s"
-                    title="Search for:" placeholder="Search for...">
-                <input type="submit" class="search-submit" value="Search">
-            </form>
-        </div>
-    </section> -->
+    
     {{ with .Site.Params.Widget.Projects }}
     {{ if (index . "show") }}
     <section id="text-5" class="widget widget_text">
@@ -82,7 +73,7 @@
                 for="cat">Categories</label><select name="cat" id="cat" class="postform">
                 <option value="-1">Select Category</option>
                 {{ range $site.Taxonomies.categories }}
-                <option class="level-0" value="{{ .Page.Title }}">{{ .Page.Title }}({{ len .Pages }})</option>
+                <option class="level-0" value="{{ .Page.RelPermalink }}">{{ .Page.Title }}({{ len .Pages }})</option>
                 {{ end }}
             </select>
         </form>
@@ -93,7 +84,7 @@
 
                 function onCatChange() {
                     if (dropdown.options[dropdown.selectedIndex].value != "" ) {
-                        window.location.href = "/categories/" + dropdown.options[dropdown.selectedIndex].value
+                        window.location.href = dropdown.options[dropdown.selectedIndex].value
                     }
                 }
                 dropdown.onchange = onCatChange;
@@ -110,7 +101,7 @@
         <h2 class="widget-title">{{ index . "title" }}</h2>
         <div class="tagcloud">
             {{ range $site.Taxonomies.tags }}
-            <a href="/tags/{{ .Page.Title }}"
+            <a href="{{ .Page.RelPermalink }}"
                 class="tag-cloud-link tag-link-58 tag-link-position-1"
                 style="font-size: 11.083333333333pt;" aria-label="Apache (6 items)">{{ .Page.Title }}</a>
             {{ end }}
