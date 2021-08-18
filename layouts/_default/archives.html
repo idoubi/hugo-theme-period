@@ -1,0 +1,61 @@
+<html lang="en-US">
+
+<head>
+    {{ partial "head.html" . }}
+    <style>
+        .post-content li {
+            list-style: none;
+            margin: 10px auto;
+        }
+        .post-content li a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body id="period" class="home blog">
+    <a class="skip-content" href="#main">Press "Enter" to skip to content</a>
+    <div id="overflow-container" class="overflow-container">
+        {{ partial "header.html" . }}
+        <div id="primary-container" class="primary-container">
+            <div class="max-width">
+                <section id="main" class="main" role="main">
+                    <div id="loop-container" class="loop-container">
+                        <div
+                            class="post type-post status-publish format-standard hentry entry">
+                            <article>
+                                <div class="post-container">
+                                    <div class="post-header">
+                                        <h2 class="post-title">
+                                            <a href="javascript:;">文章归档</a>
+                                        </h2>
+                                    </div>
+                                    <div class="post-content">
+                                        {{ range ((where .Site.RegularPages "Type" "posts").GroupByDate "2006") }}
+                                            <h3>{{ .Key }}</h3>
+                                                <ul class="archive-list">
+                                                {{ range .Pages }}
+                                                    <li>
+                                                    {{ .PublishDate.Format "01/02" }}
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                                    </li>
+                                                {{ end }}
+                                            </ul>
+                                        {{ end }}
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+                {{ partial "aside.html" . }}
+            </div><!-- .max-width -->
+        </div><!-- .primary-container -->
+
+        {{ partial "footer.html" . }}
+    </div>
+    <!-- .overflow-container -->
+</body>
+
+</html>

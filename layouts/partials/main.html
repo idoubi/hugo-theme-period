@@ -31,27 +31,27 @@
                         {{ $description = .Summary | truncate 80 }}
                         {{ end }}
                         <p>{{ $description }}</p>
-                        {{ if or .Params.Tags .Params.Categories }}
+                        <!-- {{ if or .Params.Tags .Params.Categories }}
                         <div class="post-categories">
                             {{ if .Params.Tags }}
                             <span>Tags </span>
-                            {{ range .Params.Tags }}
-                            <a href="/tags/{{ . }}" title="{{ . }}">{{ . }}</a>
-                            {{ end }}
+                                {{ range .Params.Tags }}
+                                <a href="/tags/{{ . }}" title="{{ . }}">{{ . }}</a>
+                                {{ end }}
                             {{ end }}
 
                             {{ if .Params.Categories }}
                             <span>Categories </span>
-                            {{ range .Params.Categories }}
-                            <a href="/categories/{{ . }}" title="{{ . }}">{{ . }}</a>
-                            {{ end }}
+                                {{ range .Params.Categories }}
+                                <a href="/categories/{{ . }}" title="{{ . }}">{{ . }}</a>
+                                {{ end }}
                             {{ end }}
 
-                            <!-- <i class="fa fa-comment" aria-hidden="true" title="comment icon"></i>
+                            <i class="fa fa-comment" aria-hidden="true" title="comment icon"></i>
                             with <a href="">30
-                                Comments</a></span> -->
-                            {{ end }}
+                                Comments</a></span>
                         </div>
+                        {{ end }} -->
                     </div>
             </article>
         </div>
