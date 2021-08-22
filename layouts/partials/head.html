@@ -49,7 +49,10 @@
 {{ range $k, $v := .js }}
 <script src="{{ $v }}"></script>
 {{ if eq $k "highlightjs" }}
-<script>hljs.initHighlightingOnLoad();</script>
+<script>
+hljs.configure({ ignoreUnescapedHTML: true })
+hljs.highlightAll();
+</script>
 {{ end }}
 {{ end }}
 
