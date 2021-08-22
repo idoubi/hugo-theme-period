@@ -1,0 +1,82 @@
+<html lang="en-US">
+
+<head>
+    {{ partial "head.html" . }}
+    <style>
+        .post-content li {
+            list-style: none;
+            margin: 10px auto;
+        }
+        .post-content li a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body id="period" class="home blog">
+    <a class="skip-content" href="#main">Press "Enter" to skip to content</a>
+    <div id="overflow-container" class="overflow-container">
+        {{ partial "header.html" . }}
+        <div id="primary-container" class="primary-container">
+            <div class="max-width">
+                <section id="main" class="main" role="main">
+                    <div id="loop-container" class="loop-container">
+                        {{ $pages := .Pages }}
+                        {{ if .IsHome }}
+                        {{ $pages = (where .Site.RegularPages "Section" "!=" "") }}
+                        {{ end }}
+                        {{ $paginator := .Paginate $pages }}
+                        {{ range $paginator.Pages }}
+                        <div
+                            class="post-6033 post type-post status-publish format-standard hentry category-php8 category-php-usage category-notes tag-match tag-match-expressionswitch tag-php-8 tag-php8 entry">
+                            <article>
+                                <div class="post-container">
+                                    <div class="post-header">
+                                        <h2 class="post-title">
+                                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                        </h2>
+                                    </div>
+                                    <div class="post-content">
+                                        {{ $description := .Description }}
+                                        {{ if not $description }}
+                                        {{ $description = .Content | truncate 120 }}
+                                        {{ end }}
+                                        <p>{{ $description }}</p>
+                                    </div>
+                            </article>
+                        </div>
+                        {{ end }}
+                
+                    </div>
+                
+                
+                    <nav class="navigation pagination" role="navigation" aria-label="Posts">
+                        <h2 class="screen-reader-text">Posts navigation</h2>
+                        <div class="nav-links">
+                            {{ if $paginator.HasPrev }}
+                            <a class="prev page-numbers" href="{{ $paginator.Prev.URL }}">Previous</a>
+                            {{ end }}
+                            {{ range $paginator.Pagers }}
+                            {{ if eq .PageNumber $paginator.PageNumber }}
+                            <span aria-current="page" class="page-numbers current">{{ .PageNumber }}</span>
+                            <!-- <span class="page-numbers dots">…</span> -->
+                            {{ else }}
+                            <a class="page-numbers" href="{{ .URL }}">{{ .PageNumber }}</a>
+                            {{ end }}
+                            {{ end }}
+                            {{ if $paginator.HasNext }}
+                            <a class="next page-numbers" href="{{ $paginator.Next.URL }}">Next</a>
+                            {{ end }}
+                        </div>
+                    </nav>
+                </section> <!-- .main -->
+                {{ partial "aside.html" . }}
+            </div><!-- .max-width -->
+        </div><!-- .primary-container -->
+
+        {{ partial "footer.html" . }}
+    </div>
+    <!-- .overflow-container -->
+</body>
+
+</html>
