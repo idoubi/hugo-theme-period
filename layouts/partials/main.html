@@ -2,7 +2,7 @@
     <div id="loop-container" class="loop-container">
         {{ $pages := .Pages }}
         {{ if .IsHome }}
-        {{ $pages = (where .Site.RegularPages "Section" "!=" "") }}
+        {{ $pages = (where .Site.RegularPages "Section" "=" "posts") }}
         {{ end }}
         {{ $paginator := .Paginate $pages }}
         {{ range $paginator.Pages }}
