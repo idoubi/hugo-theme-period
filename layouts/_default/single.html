@@ -46,7 +46,7 @@
                                                 <li>
                                                     <div class="rp4wp-related-post-content">
                                                         <a
-                                                            href="{{ .URL }}">{{ .Title }}</a>
+                                                            href="{{ .Permalink }}">{{ .Title }}</a>
                                                     </div>
                                                 </li>
                                                 {{ end }}
@@ -94,13 +94,13 @@
                                             {{ if .Prev }}
                                             <div class="previous">
                                                 <span><< Prev</span>
-                                                <a href="{{ .Prev.URL }}"
+                                                <a href="{{ .Prev.Permalink }}"
                                                     rel="prev">{{ .Prev.Title }}</a> </div>
                                             {{ end }}
                                             {{ if .Next }}
                                             <div class="next">
                                                 <span>Next >></span>
-                                                <a href="{{ .Next.URL }}">{{ .Next.Title }}</a> 
+                                                <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a> 
                                             </div>
                                             {{ end }}
                                         </nav>

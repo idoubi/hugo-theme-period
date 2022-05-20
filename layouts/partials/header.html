@@ -26,7 +26,7 @@
             <div id="menu-primary" class="menu-container menu-primary" role="navigation">
                 <nav class="menu">
                     <ul id="menu-primary-items" class="menu-primary-items">
-                        {{ $currURL := .URL }}
+                        {{ $currURL := .Permalink }}
                         {{ range $k, $menu := .Site.Menus.main }}
                         <li id="menu-item-{{ $k }}"
                             class="menu-item menu-item-type-custom menu-item-object-custom {{ if eq .URL $currURL }}current-menu-item{{ end }}">
