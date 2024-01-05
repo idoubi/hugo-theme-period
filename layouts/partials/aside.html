@@ -51,6 +51,21 @@
     </section>
     {{ end }}
     {{ end }}
+
+    {{ with .Site.Params.Widget.Products }}
+    {{ if (index . "show") }}
+    <section id="text-5" class="widget widget_text">
+        <h2 class="widget-title">{{ index . "title" }}</h2>
+        <div class="textwidget">
+            <div id="projects" style="line-height: 22px;">
+                {{ range (index . "items") }}
+                <a href="{{ index . "url" }}"
+                    target="_blank">{{ index . "name" }}</a>: &nbsp;{{ index . "description" }}<br>
+                {{ end }}
+        </div>
+    </section>
+    {{ end }}
+    {{ end }}
     
     {{ with .Site.Params.Widget.Qrcode }}
     {{ if (index . "show") }}
