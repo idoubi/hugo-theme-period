@@ -1,68 +1,68 @@
 <html lang="en-US">
-
-<head>
+  <head>
     {{ partial "head.html" . }}
     <style>
+      .post-content img {
+        max-width: 400px;
+      }
+      @media screen and (max-width: 768px) {
         .post-content img {
-            max-width: 400px;
+          max-width: 100%;
         }
+      }
     </style>
-</head>
+  </head>
 
-<body id="period" class="home blog">
+  <body id="period" class="home blog">
     <a class="skip-content" href="#main">Press "Enter" to skip to content</a>
     <div id="overflow-container" class="overflow-container">
-        {{ partial "header.html" . }}
-        <div id="primary-container" class="primary-container">
-            <div class="max-width">
-                <section id="main" class="main" role="main">
-                    <div id="loop-container" class="loop-container">
-                        <div
-                            class="post type-post status-publish format-standard hentry entry">
-                            <article>
-                                <div class="post-container">
-                                    <div class="post-header">
-                                        <h2 class="post-title">
-                                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                                        </h2>
-                                        {{ if or (eq .Section "posts") (eq .Section "post") }}
-                                        <div class="post-byline">Published on
-                                            <a class="date" href="javascript:;">{{ .Date.Format "2006/01/02" }}</a>
-                                            {{ $author := .Params.Author }}
-                                            {{ if not $author }}
-                                            {{ $author = .Site.Author }}
-                                            {{ end }}
-                                            {{ if $author }}
-                                            By 
-                                            <a class="author" href="javascript:;">{{ $author }}</a></div>
-                                            {{ end }}
-                                        {{ end }}
-                                    </div>
-                                    <div class="post-content">
-                                        {{ .Content }}
+      {{ partial "header.html" . }}
+      <div id="primary-container" class="primary-container">
+        <div class="max-width">
+          <section id="main" class="main" role="main">
+            <div id="loop-container" class="loop-container">
+              <div
+                class="post type-post status-publish format-standard hentry entry"
+              >
+                <article>
+                  <div class="post-container">
+                    <div class="post-header">
+                      <h2 class="post-title">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                      </h2>
+                      {{ if or (eq .Section "posts") (eq .Section "post") }}
+                      <div class="post-byline">
+                        Published on
+                        <a class="date" href="javascript:;"
+                          >{{ .Date.Format "2006/01/02" }}</a
+                        >
+                        {{ $author := .Params.Author }} {{ if not $author }} {{
+                        $author = .Site.Author }} {{ end }} {{ if $author }} By
+                        <a class="author" href="javascript:;">{{ $author }}</a>
+                      </div>
+                      {{ end }} {{ end }}
+                    </div>
+                    <div class="post-content">
+                      {{ .Content }} {{ if or (eq .Section "posts") (eq .Section
+                      "post") }} {{ $related := .Site.RegularPages.Related . |
+                      first 5 }} {{ with $related }}
+                      <div class="rp4wp-related-posts">
+                        <h3>相关文章</h3>
+                        <ul>
+                          {{ range . }}
+                          <li>
+                            <div class="rp4wp-related-post-content">
+                              <a href="{{ .Permalink }}">{{ .Title }}</a>
+                            </div>
+                          </li>
+                          {{ end }}
+                        </ul>
+                      </div>
+                      {{ end }} {{ end }}
+                    </div>
 
-                                        {{ if or (eq .Section "posts") (eq .Section "post") }}
-                                        {{ $related := .Site.RegularPages.Related . | first 5 }}
-                                        {{ with $related }}
-                                        <div class="rp4wp-related-posts">
-                                            <h3>相关文章</h3>
-                                            <ul>
-                                                {{ range . }}
-                                                <li>
-                                                    <div class="rp4wp-related-post-content">
-                                                        <a
-                                                            href="{{ .Permalink }}">{{ .Title }}</a>
-                                                    </div>
-                                                </li>
-                                                {{ end }}
-                                            </ul>
-                                        </div>
-                                        {{ end }}
-                                        {{ end }}
-                                    </div>
-
-                                    {{ if or (eq .Section "posts") (eq .Section "post") }}
-                                    <!-- <div class="copyright">
+                    {{ if or (eq .Section "posts") (eq .Section "post") }}
+                    <!-- <div class="copyright">
                                         <ul>
                                             <p></p>
                                             <li>本文地址: <a href="{{ .Permalink | relURL }}"
@@ -71,73 +71,84 @@
                                             <li>转载请注明出处 </li>
                                         </ul>
                                     </div> -->
-                                    {{ end }}
+                    {{ end }} {{ if or (eq .Section "posts") (eq .Section
+                    "post") }}
+                    <div class="post-meta">
+                      {{ with .Params.categories }}
+                      <div class="post-categories">
+                        <span>Categories&nbsp;&nbsp;</span>
+                        {{ range . }}
+                        <a
+                          href="/categories/{{ . }}"
+                          title="View all posts in PHP8"
+                          >{{ . }}</a
+                        >&nbsp;&nbsp; {{ end }}
+                      </div>
+                      {{ end }} {{ with .Params.tags }}
+                      <div class="post-tags">
+                        <ul>
+                          {{ range . }}
+                          <li>
+                            <a
+                              href="/tags/{{ . }}"
+                              title="View all posts tagged match"
+                              >{{ . }}</a
+                            >
+                          </li>
+                          {{ end }}
+                        </ul>
+                      </div>
+                      {{ end }}
 
-                                    {{ if or (eq .Section "posts") (eq .Section "post") }}
-                                    <div class="post-meta">
-                                        {{ with .Params.categories }}
-                                        <div class="post-categories">
-                                        <span>Categories&nbsp;&nbsp;</span>
-                                        {{ range . }}
-                                        <a href="/categories/{{ . }}" title="View all posts in PHP8">{{ . }}</a>&nbsp;&nbsp;
-                                        {{ end }}
-                                        </div>
-                                        {{ end }}
-                                        {{ with .Params.tags }}
-                                        <div class="post-tags">
-                                            <ul>
-                                            {{ range . }}
-                                            <li>
-                                                <a href="/tags/{{ . }}" title="View all posts tagged match">{{ . }}</a>
-                                            </li>
-                                            {{ end }}
-                                            </ul>
-                                        </div>
-                                        {{ end }}
-                                        
-                                        <nav class="further-reading">
-                                            {{ if .Prev }}
-                                            <div class="previous">
-                                                <span><< Prev</span>
-                                                <a href="{{ .Prev.Permalink }}"
-                                                    rel="prev">{{ .Prev.Title }}</a> </div>
-                                            {{ end }}
-                                            {{ if .Next }}
-                                            <div class="next">
-                                                <span>Next >></span>
-                                                <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a> 
-                                            </div>
-                                            {{ end }}
-                                        </nav>
-                                    </div>
-                                    
-                                    {{ end }}
-
-                                    {{ with .Site.Params.Comment }}
-                                    {{ if (index . "show") }}
-                                    <div style="width: 100%;height: 1px;border:1px solid #f8f8f8;margin: 50px 0 30px;"></div>
-                                    <script src="https://utteranc.es/client.js"
-                                            repo="{{ .repo }}"
-                                            issue-term="title"
-                                            theme="{{ .theme }}"
-                                            crossorigin="anonymous"
-                                            async>
-                                    </script>
-                                    {{ end }}
-                                    {{ end }}
-
-                                </div>
-                            </article>
+                      <nav class="further-reading">
+                        {{ if .Prev }}
+                        <div class="previous">
+                          <span><< Prev</span>
+                          <a href="{{ .Prev.Permalink }}" rel="prev"
+                            >{{ .Prev.Title }}</a
+                          >
                         </div>
+                        {{ end }} {{ if .Next }}
+                        <div class="next">
+                          <span>Next >></span>
+                          <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
+                        </div>
+                        {{ end }}
+                      </nav>
                     </div>
-                </section>
-                {{ partial "aside.html" . }}
-            </div><!-- .max-width -->
-        </div><!-- .primary-container -->
 
-        {{ partial "footer.html" . }}
+                    {{ end }} {{ with .Site.Params.Comment }} {{ if (index .
+                    "show") }}
+                    <div
+                      style="
+                        width: 100%;
+                        height: 1px;
+                        border: 1px solid #f8f8f8;
+                        margin: 50px 0 30px;
+                      "
+                    ></div>
+                    <script
+                      src="https://utteranc.es/client.js"
+                      repo="{{ .repo }}"
+                      issue-term="title"
+                      theme="{{ .theme }}"
+                      crossorigin="anonymous"
+                      async
+                    ></script>
+                    {{ end }} {{ end }}
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+          {{ partial "aside.html" . }}
+        </div>
+        <!-- .max-width -->
+      </div>
+      <!-- .primary-container -->
+
+      {{ partial "footer.html" . }}
     </div>
     <!-- .overflow-container -->
-</body>
-
+  </body>
 </html>
